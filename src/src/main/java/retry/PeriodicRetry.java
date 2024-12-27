@@ -1,4 +1,4 @@
-import java.util.function.Function;
+package retry;
 
 public class PeriodicRetry<P, R> extends RetryAlgorithm<P, R> {
 
