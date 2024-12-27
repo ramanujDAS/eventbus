@@ -20,4 +20,17 @@ When an event fails to be processed by a consumer, the EventBus retries delivery
 **Dead Letter Queue (DLQ)**
 Failed events that exceed the maximum retry count are moved to a Dead Letter Queue (DLQ) for later analysis or manual intervention.
 
+1) Multiple publishers and subscribers (Register from any class to eventbus)
+2) Causal ordering of topics
+3) Supports configurable retry attempts.
+4) Have a dead letter queue.
+5) Idempotency on event receiving
+6) Allow both pull and push models
+7) Allow subscribing from a timestamp or offset
+8) Allow preconditions for event subscription
+
+Optional features:
+1) Add database support, with flushing on threshold.
+2) Retrieve K elements together for subscriber.
+
 
