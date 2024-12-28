@@ -86,6 +86,36 @@ public class EventBus {
 
 
     }
+
+    public CompletionStage<Void> subscribeForPush(String topic,
+                                                  String subscriber,
+                                                  Function<BusEvent, CompletableFuture<Void>> handler) {
+           return consistentExecutor.getThreadFor(topic + subscriber ,  () -> subscribeForPushEvents(topic, subscriber, handler));
+
+    }
+   // need to set index while putting the subscription for topics
+    private Void subscribeForPushEvents(String topic, String subscriber, Function<BusEvent, CompletableFuture<Void>> handler) {
+
+
+
+    }
+    // need to set index while putting the subscription for topics
+    private Void subscribeForPullEvents(String topic, String subscriber) {
+
+    }
+
+
+    public CompletionStage<Void> subscribeForPull(String topic, String subscriber) {
+        return consistentExecutor.getThreadFor(topic + subscriber, () -> subscribeForPullEvents(topic, subscriber));
+    }
+    public CompletionStage<Void> unsubscribe(String topic, String subscriber) {
+        return consistentExecutor.getThreadFor(topic + subscriber, () -> unsubscribeEvents(topic, subscriber));
+    }
+
+    private void unsubscribeEvents(String topic, String subscriber) {
+        pullSubscribers.getOrDefault(topic, new ConcurrentHashMap<>()).remove(subscriber);
+        pushSubscribers.getOrDefault(topic, new ConcurrentHashMap<>()).remove(subscriber);
+    }
 }
 
 
